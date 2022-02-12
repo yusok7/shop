@@ -1,6 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	// (1) querydsl 플러그인 추가
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 }
 
@@ -22,6 +24,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// querydsl 라이브러리 dependency 추가
+	implementation 'com.querydsl:querydsl-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -31,4 +35,25 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// querydsl에서 사용할 경로 선언
+def querydslDir = "$buildDir/generated/querydsl" // (3)
+
+// querydsl 설정을 추가. jpa 사용 여부와 사용할 경로를 지정
+querydsl { // (4)
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets { // (5) 빌드 시 사용할 sourceSet 추가
+	main.java.srcDir querydslDir
+}
+
+configurations { // (6) querydsl이 complieClassPath를 상속받도록 설정
+	querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl { // (7) 컴파일 시 사용할 옵션 설정
+	options.annotationProcessorPath = configurations.querydsl
 }
