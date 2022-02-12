@@ -1,13 +1,16 @@
 package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Table(name = "item")
+@NoArgsConstructor
 @Entity
 public class Item {
 
@@ -35,5 +38,14 @@ public class Item {
     private LocalDateTime regTime; // 등록 시간
 
     private LocalDateTime updateTime; // 수정 시간
+
+    @Builder
+    public Item(String itemNm, int price, int stockNumber, String itemDetail, ItemSellStatus itemSellStatus) {
+        this.itemNm = itemNm;
+        this.price = price;
+        this.stockNumber = stockNumber;
+        this.itemDetail = itemDetail;
+        this.itemSellStatus = itemSellStatus;
+    }
 
 }
