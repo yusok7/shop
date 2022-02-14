@@ -47,4 +47,22 @@ public class ThymeleafExController {
         model.addAttribute("itemDtoList", itemDtoList);
         return "thymeleafEx/thymeleafEx03";
     }
+
+    @GetMapping(value = "/ex04")
+    public String thymeleafExample04(Model model) {
+        List<ItemDto> itemDtoList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ItemDto itemDto = ItemDto.builder()
+                    .itemDetail("상품 상세 설명" + i)
+                    .itemNm("테스트 상품" + i)
+                    .price(1000 * i)
+                    .build();
+
+            itemDtoList.add(itemDto);
+        }
+
+        model.addAttribute("itemDtoList", itemDtoList);
+        return "thymeleafEx/thymeleafEx04";
+    }
 }
