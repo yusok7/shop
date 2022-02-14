@@ -1,5 +1,6 @@
 package com.shop.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +13,11 @@ public class ItemDto {
     private Integer price;
     private String itemDetail;
     private String sellStatCd;
+
+    @Builder
+    public ItemDto(String itemNm, Integer price, String itemDetail) {
+        this.itemNm = itemNm;
+        this.price = price;
+        this.itemDetail = itemDetail;
+    }
 }
