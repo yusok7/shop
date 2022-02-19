@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	// querydsl 라이브러리 dependency 추가
 	implementation 'com.querydsl:querydsl-jpa'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.5'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
