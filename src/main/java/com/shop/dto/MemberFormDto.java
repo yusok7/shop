@@ -5,15 +5,12 @@ import com.shop.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
 @NoArgsConstructor
 public class MemberFormDto {
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     private String name;
     private String email;
@@ -31,6 +28,7 @@ public class MemberFormDto {
     }
 
     public Member toEntity() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return Member.builder()
                 .name(name)
                 .email(email)
