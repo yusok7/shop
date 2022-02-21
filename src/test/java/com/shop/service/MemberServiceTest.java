@@ -1,6 +1,5 @@
 package com.shop.service;
 
-import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import com.shop.entity.Member;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +26,6 @@ class MemberServiceTest {
                 .email("test@gmail.com")
                 .address("경기도 남양주시")
                 .password("1234")
-                .role(Role.USER)
                 .build();
         return memberFormDto.toEntity();
     }
