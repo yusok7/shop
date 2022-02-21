@@ -5,10 +5,12 @@ import com.shop.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class MemberFormDto {
 
@@ -16,15 +18,13 @@ public class MemberFormDto {
     private String email;
     private String password;
     private String address;
-    private Role role;
 
     @Builder
-    public MemberFormDto(String name, String email, String password, String address, Role role) {
+    public MemberFormDto(String name, String email, String password, String address) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.role = role;
     }
 
     public Member toEntity() {
