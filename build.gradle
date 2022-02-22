@@ -30,6 +30,7 @@ dependencies {
 	implementation 'com.querydsl:querydsl-jpa'
 	// security
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.5'
+	testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.5.2'
 	// validation
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
 	compileOnly 'org.projectlombok:lombok'
