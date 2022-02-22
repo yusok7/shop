@@ -30,6 +30,8 @@ dependencies {
 	implementation 'com.querydsl:querydsl-jpa'
 	// security
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.5'
+	// validation
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
