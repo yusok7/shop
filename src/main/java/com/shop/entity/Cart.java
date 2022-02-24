@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,4 +20,9 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Builder
+    public Cart(Member member) {
+        this.member = member;
+    }
 }
