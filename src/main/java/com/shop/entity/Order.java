@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -28,14 +30,18 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     private LocalDateTime regTime;
 
     private LocalDateTime updateTime;
 
     @Builder
-    public Order(Member member, LocalDateTime orderDate, OrderStatus orderStatus) {
+    public Order(Member member, LocalDateTime orderDate, OrderStatus orderStatus, List<OrderItem> orderItems) {
         this.member = member;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
+        this.orderItems = orderItems;
     }
 }
