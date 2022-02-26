@@ -113,7 +113,7 @@ class OrderTest {
     }
 
     @Test
-    @DisplayName("즉시로딩 쿼리 테스트")
+    @DisplayName("즉시로딩 - 지연로딩 쿼리확인 테스트")
     void lazyLoadingTest() {
         Order order = this.createOrder();
         Long orderItemId = order.getOrderItems().get(0).getId();
