@@ -2,6 +2,8 @@ package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.repository.ItemRepository;
+import com.shop.repository.MemberRepository;
+import com.shop.repository.OrderItemRepository;
 import com.shop.repository.OrderRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +33,12 @@ class OrderTest {
     @PersistenceContext
     EntityManager em;
 
+    @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
     private Item createItem() {
         Item item = Item.builder()
                 .itemNm("테스트 상품")
@@ -42,6 +50,30 @@ class OrderTest {
         return item;
     }
 
+    private Order createOrder() {
+        Order order = new Order();
+
+        for (int i = 0; i < 3; i++) {
+            Item item = createItem();
+            itemRepository.save(item);
+
+            OrderItem orderItem = OrderItem.builder()
+                    .item(item)
+                    .count(10)
+                    .orderPrice(1000)
+                    .order(order)
+                    .build();
+            order.getOrderItems().add(orderItem);
+        }
+
+        Member member = new Member();
+        memberRepository.save(member);
+
+        order.setMember(member);
+        orderRepository.save(order);
+        return order;
+    }
+
     @Test
     @DisplayName("영속성 전이 테스트")
     void cascadeTest() {
@@ -50,7 +82,7 @@ class OrderTest {
 
         for (int i = 0; i < 3; i++) {
             Item item = this.createItem();
-            // 바로 아래의 코드느 꼭 필요한 코드이다.
+            // 바로 아래의 코드는 꼭 필요한 코드이다.
             // 왜 꼭 필요한지 생각해보기!
             itemRepository.save(item);
 
@@ -69,5 +101,20 @@ class OrderTest {
         Order savedOrder = orderRepository.findById(order.getId())
                 .orElseThrow(EntityNotFoundException::new);
         Assertions.assertThat(savedOrder.getOrderItems().size()).isEqualTo(3);
+    }
+
+
+    @Test
+    @DisplayName("고아객체 제거 테스트")
+    void orphanRemovalTest() {
+        Order order = this.createOrder();
+        order.getOrderItems().remove(0);
+        em.flush();
+    }
+
+    @Test
+    @DisplayName("지연 로딩 테스트")
+    void lazyLoadingTest() {
+
     }
 }
