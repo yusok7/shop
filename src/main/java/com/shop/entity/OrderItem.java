@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +27,6 @@ public class OrderItem {
     private int orderPrice;
 
     private int count;
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
 
     @Builder
     public OrderItem(Item item, Order order, int orderPrice, int count) {
