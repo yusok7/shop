@@ -45,4 +45,8 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderItems = orderItems;
     }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }
