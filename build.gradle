@@ -34,6 +34,8 @@ dependencies {
 	testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.5.2'
 	// validation
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.2'
+	// modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
