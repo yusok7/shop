@@ -48,7 +48,7 @@ public class MemberFormDto {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .address(address)
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
     }
 }
