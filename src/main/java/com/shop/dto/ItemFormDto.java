@@ -2,7 +2,9 @@ package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
+@NoArgsConstructor
 public class ItemFormDto {
 
     private Long id;
@@ -38,6 +41,15 @@ public class ItemFormDto {
     private List<Long> itemImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
+
+    @Builder
+    public ItemFormDto(String itemNm, Integer price, String itemDetail, Integer stockNumber, ItemSellStatus itemSellStatus) {
+        this.itemNm = itemNm;
+        this.price = price;
+        this.itemDetail = itemDetail;
+        this.stockNumber = stockNumber;
+        this.itemSellStatus = itemSellStatus;
+    }
 
     public Item toEntity() {
         return Item.builder()
