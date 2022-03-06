@@ -101,6 +101,12 @@ class OrderTest {
         Order savedOrder = orderRepository.findById(order.getId())
                 .orElseThrow(EntityNotFoundException::new);
         Assertions.assertThat(savedOrder.getOrderItems().size()).isEqualTo(3);
+
+        Long orderItemId = savedOrder.getOrderItems().get(0).getId();
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        System.out.println("orderItemId = " + orderItemId);
+        System.out.println(orderItem.getId());
     }
 
 
