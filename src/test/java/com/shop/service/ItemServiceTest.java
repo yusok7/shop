@@ -38,6 +38,10 @@ class ItemServiceTest {
     @Autowired
     ItemImgRepository itemImgRepository;
 
+    /**
+     * MockMultipartFile의 활용
+     * MockMultipartFile 클래스를 이용하여 가짜 MultipartFile 리스트를 만들어서 반환해주는 메소드
+     */
     List<MultipartFile> createMultipartFiles() throws Exception {
 
         List<MultipartFile> multipartFileList = new ArrayList<>();
@@ -72,12 +76,14 @@ class ItemServiceTest {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(EntityNotFoundException::new);
 
+        // 상품 관련 확인
         assertThat(itemFormDto.getItemNm()).isEqualTo(item.getItemNm());
         assertThat(itemFormDto.getItemSellStatus()).isEqualTo(item.getItemSellStatus());
         assertThat(itemFormDto.getItemDetail()).isEqualTo(item.getItemDetail());
         assertThat(itemFormDto.getPrice()).isEqualTo(item.getPrice());
         assertThat(itemFormDto.getStockNumber()).isEqualTo(item.getStockNumber());
 
+        // 상품 이미지 관련 확인
         assertThat(multipartFileList.get(0).getOriginalFilename()).isEqualTo(itemImgList.get(0).getOriImgName());
 
     }

@@ -47,8 +47,14 @@ public class ItemService {
         return item.getId();
     }
 
+    // 등록된 상품을 불러오는 메소드
     @Transactional(readOnly = true)
     public ItemFormDto getItemDtl(Long itemId) {
+
+        /**
+         * 여기서 알아야 할 점은 repository를 통해 entity를 받아와
+         * DTO로 변환해 Controller에 반환을 한다는 점이다.
+         */
 
         // itemId에 해당하는 상품의 image를 조회한다. 등록순으로 가져오기 위해 상품 이미지 아이디 오름차순으로 가지고 온다.
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
