@@ -4,6 +4,10 @@ import com.shop.entity.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 주문 상품 정보를 담을 OrderItemDto 클래스
+ */
+
 @Getter @Setter
 public class OrderItemDto {
 
